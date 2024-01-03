@@ -13,4 +13,13 @@ module.exports = {
   getTodos: () => {
     return lists;
   },
+  getTodoById: (id) => {
+    try {
+      const list = lists.find((list) => list.id === id);
+      if (!list) throw { statusCode: 404, message: "Not found." };
+      return list;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
