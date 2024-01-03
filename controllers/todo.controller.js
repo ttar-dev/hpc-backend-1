@@ -41,4 +41,21 @@ module.exports = {
       req.responseError(res, error);
     }
   },
+  updateTodoById: async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        throw { statusCode: 400, message: errors.array() };
+      }
+
+      const list = todoServices.updateTodoById(
+        parseInt(req.params.id),
+        req.body
+      );
+
+      req.responseSuccess(res, { data: list || {} });
+    } catch (error) {
+      req.responseError(res, error);
+    }
+  },
 };

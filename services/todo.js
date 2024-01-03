@@ -22,4 +22,15 @@ module.exports = {
       throw error;
     }
   },
+  updateTodoById: (id, { desc }) => {
+    try {
+      const list = lists.find((list) => list.id === id);
+      if (!list) throw { statusCode: 404, message: "Not found." };
+
+      list.desc = desc;
+      return list;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

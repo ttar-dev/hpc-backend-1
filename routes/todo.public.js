@@ -15,18 +15,11 @@ router
 router
   .route("/:id")
   .put(
-    [param("id").notEmpty().withMessage("ID is required")],
-    async (req, res) => {
-      try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          throw { statusCode: 400, message: errors.array() };
-        }
-        req.responseSuccess(res, {});
-      } catch (error) {
-        req.responseError(res, error);
-      }
-    }
+    [
+      param("id").notEmpty().withMessage("ID is required"),
+      body("desc").notEmpty().withMessage("Description is required"),
+    ],
+    todoCtl.updateTodoById
   );
 
 router
