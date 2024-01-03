@@ -58,4 +58,18 @@ module.exports = {
       req.responseError(res, error);
     }
   },
+  removeTodoById: async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        throw { statusCode: 400, message: errors.array() };
+      }
+
+      const list = todoServices.removeTodoById(parseInt(req.params.id));
+
+      req.responseSuccess(res, { data: list || {} });
+    } catch (error) {
+      req.responseError(res, error);
+    }
+  },
 };

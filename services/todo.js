@@ -33,4 +33,15 @@ module.exports = {
       throw error;
     }
   },
+  removeTodoById: (id) => {
+    try {
+      const list = lists.find((list) => list.id === id);
+      if (!list) throw { statusCode: 404, message: "Not found." };
+
+      lists = lists.filter((list) => list.id !== id);
+      return list;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
