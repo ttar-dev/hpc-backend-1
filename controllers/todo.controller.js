@@ -53,7 +53,7 @@ module.exports = {
         req.body
       );
 
-      req.responseSuccess(res, { data: list || {} });
+      req.responseSuccess(res, { data: list || {}, message: "updated." });
     } catch (error) {
       req.responseError(res, error);
     }
@@ -67,7 +67,7 @@ module.exports = {
 
       const list = todoServices.removeTodoById(parseInt(req.params.id));
 
-      req.responseSuccess(res, { data: list || {} });
+      req.responseSuccess(res, { data: list || {}, message: "deleted." });
     } catch (error) {
       req.responseError(res, error);
     }
