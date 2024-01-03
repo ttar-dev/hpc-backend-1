@@ -1,6 +1,5 @@
 const { validationResult } = require("express-validator");
-
-let lists = [];
+const todoServices = require("../services/todo");
 
 module.exports = {
   createTodoList: async (req, res) => {
@@ -9,9 +8,8 @@ module.exports = {
       if (!errors.isEmpty()) {
         throw { statusCode: 400, message: errors.array() };
       }
-      const { desc } = req.body;
-      const newList = { id: lists?.length + 1, desc };
-      lists.push(newList);
+
+      todoServices.assignTodoList(req.body);
 
       req.responseSuccess(res, {
         statusCode: 201,
