@@ -1,15 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { validationResult, body, param } = require("express-validator");
-const { createTodoList } = require("../controllers/todo.controller");
+const todoCtl = require("../controllers/todo.controller");
 
-router.route("/").get(async (req, res) => {
-  try {
-    req.responseSuccess(res, { data: lists });
-  } catch (error) {
-    req.responseError(res, error);
-  }
-});
+router.route("/").get(todoCtl.getTodos);
 
 router
   .route("/:id")
@@ -66,7 +60,7 @@ router
   .route("/")
   .post(
     [body("desc").notEmpty().withMessage("Description is required")],
-    createTodoList
+    todoCtl.assignTodoList
   );
 
 module.exports = router;
